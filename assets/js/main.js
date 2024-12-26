@@ -261,3 +261,26 @@
   new PureCounter();
 
 })()
+
+
+//New Method to send Message
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  const formData = new FormData(this);
+  const formObject = Object.fromEntries(formData.entries());
+
+  const response = await fetch('https://yourapiurl.com/api/contact', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(formObject),
+  });
+
+  if (response.ok) {
+    document.querySelector('.sent-message').style.display = 'block';
+  } else {
+    document.querySelector('.error-message').style.display = 'block';
+  }
+});
